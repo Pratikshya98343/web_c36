@@ -5,7 +5,7 @@ dotenv.config();
 // Middleware to verify JWT token
 export function authenticateToken(req, res, next) {
   // Skip token verification for the login route
-  if (req.path === "/api/auth/login"  || "api/users") {
+  if (req.path === "/api/auth/login" || req.path == "/api/users") {
     return next();
   }
 
@@ -22,7 +22,7 @@ export function authenticateToken(req, res, next) {
     if (err) {
       return res.status(403).send("Invalid or expired token.");
     }
-    req.user = decoded; // Attach decoded payload to request object
-    next(); // Proceed to the next middleware or route handler
+    req.user = decoded;
+    next(); 
   });
 }
